@@ -4,7 +4,7 @@
         <ol class="breadcrumb ">
             <li class="breadcrumb-item"><a>Pasien</a></li>
             <li class="breadcrumb-item "><a href="<?= base_url('pasien'); ?>">List Data</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit Data</li>
+            <li class="breadcrumb-item active" aria-current="page">Add Data</li>
         </ol>
     </nav>
     <div class="row">
@@ -14,38 +14,42 @@
                     <?php
                     //create form
                     $attributes = array('method' => "post", "autocomplete" => "off");
-                    echo form_open('', $attributes); ?>
+                    echo form_open('', $attributes);
+                    ?>
                     <div class="form-group row">
-                        <label for="id_pasien" class="col-sm-2 col-form-label">ID Pasien</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="id_pasien" name="id_pasien" value=" <?= $data_pasien['id_pasien']; ?>" readonly>
+                        <label for="id_pasien" class="col-sm-2 col-form-label">Id Pasien</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="id_pasien" name="id_pasien" value="<?= set_value('id_pasien'); ?>">
                             <small class="text-danger">
                                 <?php echo form_error('id_pasien') ?>
                             </small>
                         </div>
                     </div>
+
                     <div class="form-group row">
-                        <label for="nama_pasien" class="col-sm-2 col-formlabel">Nama Pasien</label>
+                        <label for="nama_pasien" class="col-sm-2 col-form-label">Nama Pasien</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nama_pasien" name="nama_pasien" value=" <?= $data_pasien['nama_pasien']; ?>">
+                            <input type="text" class="form-control" id="nama_pasien" name="nama_pasien" value=" <?= set_value('nama_pasien'); ?>">
                             <small class="text-danger">
                                 <?php echo form_error('nama_pasien') ?>
                             </small>
                         </div>
                     </div>
+
                     <fieldset class="form-group">
                         <div class="row">
-                            <legend class="col-form-label col-sm-2 pt-0">Jenis
-                                Kelamin</legend>
+                            <legend class="col-form-label col-sm-2 pt-0">Jenis Kelamin</legend>
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="jenis_kelamin" name="jenis_kelamin" value="Laki-laki" <?php if ($data_pasien['jenis_kelamin'] == "Laki-laki") : echo "checked"; endif; ?>>
+                                    <input class="form-check-input" type="radio" id="jenis_kelamin" name="jenis_kelamin" value="Laki-laki"
+                                        <?php if (set_value('jenis_kelamin') == "Laki-laki") : echo "checked"; endif; ?>>
                                     <label class="form-check-label" for="jenis_kelamin">
                                         Laki-laki
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="jenis_kelamin2" name="jenis_kelamin" value="Perempuan" <?php if ($data_pasien['jenis_kelamin'] == "Perempuan") : echo "checked"; endif; ?>>
+                                    <input class="form-check-input" type="radio" id="jenis_kelamin2" name="jenis_kelamin" value="Perempuan"
+                                        <?php if (set_value('jenis_kelamin') == "Perempuan") : echo "checked"; endif; ?>>
                                     <label class="form-check-label" for="jenis_kelamin2">
                                         Perempuan
                                     </label>
@@ -56,34 +60,37 @@
                             </div>
                         </div>
                     </fieldset>
+
                     <div class="form-group row">
-                        <label for="umur" class="col-sm-2 col-formlabel">Umur</label>
+                        <label for="umur" class="col-sm-2 col-form-label">Umur</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="umur" name="umur" rows="3"><?= $data_pasien['umur']; ?></textarea>
+                            <textarea class="form-control" id="umur" name="umur" rows="3"><?= set_value('umur'); ?></textarea>
                             <small class="text-danger">
                                 <?php echo form_error('umur') ?>
                             </small>
                         </div>
                     </div>
+                    
                     <div class="form-group row">
-                        <label for="alamat" class="col-sm-2 col-formlabel">Alamat</label>
+                        <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="alamat" name="alamat" rows="3"><?= $data_pasien['alamat']; ?></textarea>
+                            <textarea class="form-control" id="alamat" name="alamat" rows="3"><?= set_value('alamat'); ?></textarea>
                             <small class="text-danger">
                                 <?php echo form_error('alamat') ?>
                             </small>
                         </div>
                     </div>
+
                     <div class="form-group row">
-                        <label for="no_telp" class="col-sm-2 col-form-label">No
-                            Telp</label>
+                        <label for="no_telp" class="col-sm-2 col-form-label">No Telp</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="no_telp" name="no_telp" value="<?= $data_pasien['no_telp']; ?>">
+                            <input type="text" class="form-control" id="no_telp" name="no_telp" value="<?= set_value('no_telp'); ?>">
                             <small class="text-danger">
                                 <?php echo form_error('no_telp') ?>
                             </small>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <div class="col-sm-10 offset-md-2">
                             <button type="submit" class="btn btn-primary">Simpan</button>
