@@ -55,8 +55,8 @@ function mdi_post()
 
     //Jika semua data wajib diisi
     if (
-        $data['medicine_id'] == NULL || $data['nama_obat'] == NULL || $data['deskripsi'] == NULL || $data['pembuat_obat']
-        == NULL || $data['stok_obat'] == NULL || $data['harga'] == NULL || $data['tanggal_kadaluarsa'] == NULL 
+        $data['medicine_id'] == NULL || $data['medicine_name'] == NULL || $data['medicine_category'] == NULL || $data['medicine_price']
+        == NULL 
     ) {
 
         $this->response(
@@ -78,7 +78,7 @@ function mdi_post()
             RestController::HTTP_BAD_REQUEST
         );
         //Jika data tersimpan
-    } elseif ($this->Medicine_model->insertObat($data) > 0) {
+    } elseif ($this->Medicine_model->insertMedicine($data) > 0) {
         $this->response(
             [
                 'status' => true,
@@ -113,17 +113,17 @@ function mdi_put()
             [
                 'status' => $medicine_id,
                 'response_code' => RestController::HTTP_BAD_REQUEST,
-                'message' => 'Obat Tidak Boleh Kosong',
+                'message' => 'Medicine Tidak Boleh Kosong',
             ],
             RestController::HTTP_BAD_REQUEST
         );
         //Jika data berhasil berubah
-    } elseif ($this->Medicine_model->updateObat($data, $medicine_id) > 0) {
+    } elseif ($this->Medicine_model->updateMedicine($data, $medicine_id) > 0) {
         $this->response(
             [
                 'status' => true,
                 'response_code' => RestController::HTTP_CREATED,
-                'message' => 'Data Obat Dengan Id Obat ' . $medicine_id . ' Berhasil Diubah',
+                'message' => 'Data Medicine Dengan Id Medicine ' . $medicine_id . ' Berhasil Diubah',
             ],
             RestController::HTTP_CREATED
         );
@@ -149,17 +149,17 @@ function mdi_delete()
             [
                 'status' => $medicine_id,
                 'response_code' => RestController::HTTP_BAD_REQUEST,
-                'message' => 'Obat Tidak Boleh Kosong',
+                'message' => 'Medicine Tidak Boleh Kosong',
             ],
             RestController::HTTP_BAD_REQUEST
         );
         //Kondisi ketika OK
-    } elseif ($this->Medicine_model->deleteObat($medicine_id) > 0) {
+    } elseif ($this->Medicine_model->deleteMedicine($medicine_id) > 0) {
         $this->response(
             [
                 'status' => true,
                 'response_code' => RestController::HTTP_OK,
-                'message' => 'Data Obat Dengan Id Obat ' . $medicine_id . ' Berhasil Dihapus',
+                'message' => 'Data Medicine Dengan Id Medicine ' . $medicine_id . ' Berhasil Dihapus',
             ],
             RestController::HTTP_OK
         );
@@ -169,7 +169,7 @@ function mdi_delete()
             [
                 'status' => false,
                 'response_code' => RestController::HTTP_BAD_REQUEST,
-                'message' => 'Data Obat Dengan Obat ' . $medicine_id . ' Tidak Ditemukan',
+                'message' => 'Data Medicine Dengan Medicine ' . $medicine_id . ' Tidak Ditemukan',
             ],
             RestController::HTTP_BAD_REQUEST
         );

@@ -11,13 +11,16 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="<?= base_url('pasien'); ?>">Pasien</a>
+                <a class="nav-link" href="<?= base_url('action'); ?>">Action</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('obat'); ?>">Obat</a>
+                <a class="nav-link" href="<?= base_url('doctor'); ?>">Doctor</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('transaksi'); ?>">Transaksi</a>
+                <a class="nav-link" href="<?= base_url('medicine'); ?>">Medicine</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('patience'); ?>">Patience</a>
             </li>
         </ul>
     </div>

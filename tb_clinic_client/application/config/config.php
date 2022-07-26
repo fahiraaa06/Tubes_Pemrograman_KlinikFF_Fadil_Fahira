@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/ci_client';
+$config['base_url'] = 'http://localhost/Tubes_Pemrograman_KlinikFF_Fadil_Fahira/tb_clinic_client';
 
 /*
 |--------------------------------------------------------------------------
