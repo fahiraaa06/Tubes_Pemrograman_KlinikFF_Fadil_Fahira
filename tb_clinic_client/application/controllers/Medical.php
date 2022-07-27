@@ -9,6 +9,9 @@ class Medical extends CI_Controller
       parent::__construct();
       $this->load->model('Medical_model');
       $this->load->library('form_validation');
+      $this->load->model('Patience_model');
+      $this->load->model('Action_model');
+      $this->load->model('Doctor_model');
    }
 
    public function index()
@@ -38,6 +41,11 @@ class Medical extends CI_Controller
    public function add()
    {
       $data['title'] = "Tambah Data Medical";
+      
+      $data['data_patience'] = $this->Patience_model->getAll();
+      $data['data_doctor'] = $this->Doctor_model->getAll();
+      $data['data_action'] = $this->Action_model->getAll();
+
 
       $this->form_validation->set_rules('medical_id', 'Medical ID', 'trim|required');
       $this->form_validation->set_rules('medical_date', 'Medical Name', 'trim|required');
@@ -46,9 +54,9 @@ class Medical extends CI_Controller
       $this->form_validation->set_rules('medical_blood_pressure', 'Medical Age', 'trim|required');
       $this->form_validation->set_rules('medical_price', 'Medical Gender', 'trim|required');
       $this->form_validation->set_rules('medical_status', 'Medical Phone', 'trim|required');
-      $this->form_validation->set_rules('patience_id', 'Medical Phone', 'trim|required');
-      $this->form_validation->set_rules('doctor_id', 'Medical Phone', 'trim|required');
-      $this->form_validation->set_rules('action_id', 'Medical Phone', 'trim|required');
+      $this->form_validation->set_rules('patience_id', 'Patience ID', 'trim|required');
+      $this->form_validation->set_rules('doctor_id', 'Doctor ID', 'trim|required');
+      $this->form_validation->set_rules('action_id', 'Action ID', 'trim|required');
 
       if ($this->form_validation->run() == false) {
          $this->load->view('templates/header', $data);
@@ -89,6 +97,9 @@ class Medical extends CI_Controller
       $data['title'] = "Update Data Medical";
 
       $data['data_medical'] = $this->Medical_model->getById($medical_id);
+      $data['data_patience'] = $this->Patience_model->getAll();
+      $data['data_doctor'] = $this->Doctor_model->getAll();
+      $data['data_action'] = $this->Action_model->getAll();
 
       $this->form_validation->set_rules('medical_id', 'Medical ID', 'trim|required');
       $this->form_validation->set_rules('medical_date', 'Medical Name', 'trim|required');
@@ -97,9 +108,9 @@ class Medical extends CI_Controller
       $this->form_validation->set_rules('medical_blood_pressure', 'Medical Age', 'trim|required');
       $this->form_validation->set_rules('medical_price', 'Medical Gender', 'trim|required');
       $this->form_validation->set_rules('medical_status', 'Medical Phone', 'trim|required');
-      $this->form_validation->set_rules('patience_id', 'Medical Phone', 'trim|required');
-      $this->form_validation->set_rules('doctor_id', 'Medical Phone', 'trim|required');
-      $this->form_validation->set_rules('action_id', 'Medical Phone', 'trim|required');
+      $this->form_validation->set_rules('patience_id', 'Patience ID', 'trim|required');
+      $this->form_validation->set_rules('doctor_id', 'Doctor ID', 'trim|required');
+      $this->form_validation->set_rules('action_id', 'Action ID', 'trim|required');
 
       if ($this->form_validation->run() == false) {
          $this->load->view('templates/header', $data);

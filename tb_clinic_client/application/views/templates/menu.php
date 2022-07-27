@@ -66,6 +66,7 @@
                     </div>
                 </div>
             </li>
+<<<<<<< HEAD
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -99,6 +100,20 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
+=======
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('medical'); ?>">Medical</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('recipe'); ?>">Recipe</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('registry'); ?>">Registry</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('transaction'); ?>">Transaction Belum</a>
+            </li>
+>>>>>>> 73e6283c4c537682dc56ec2bb666de355c3d81ae
         </ul>
         <!-- End of Sidebar -->
 
