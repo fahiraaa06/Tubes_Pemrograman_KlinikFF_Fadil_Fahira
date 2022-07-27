@@ -1,4 +1,4 @@
-<div class="container pt-5">
+<div class="container pt-3">
     <h3><?= $title ?></h3>
     <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
     <nav aria-label="breadcrumb">
@@ -61,3 +61,12 @@
     //menampilkan data ketabel dengan plugin datatables
     $('#tableACTION').DataTable();
 </script>
+
+</div>
+            <!-- End of Main Content -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
