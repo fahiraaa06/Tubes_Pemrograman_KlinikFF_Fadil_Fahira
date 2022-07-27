@@ -22,6 +22,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('patience'); ?>">Patience</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('medical'); ?>">Medical</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('recipe'); ?>">Recipe</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('registry'); ?>">Registry</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('transaction'); ?>">Transaction Belum</a>
+            </li>
         </ul>
     </div>
 </nav>

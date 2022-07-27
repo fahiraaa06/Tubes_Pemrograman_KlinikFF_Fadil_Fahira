@@ -90,8 +90,8 @@
                         <label for="patience_id" class="col-sm-2 col-form-label">Patience Id</label>
                         <div class="col-sm-5">
                             <select class="form-control" name="patience_id" id="patience_id">
-                                <?php foreach ($data_patience as $dk) : ?>
-                                    <option value="<?= $dk['patience_id'] ?>"><?= $dk['patience_id'] ?></option>
+                                <?php foreach ($data_patience as $ptc) : ?>
+                                    <option value="<?= $ptc['patience_id'] ?>"><?= $ptc['patience_id'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <small class="text-danger">
@@ -103,7 +103,11 @@
                     <div class="form-group row">
                         <label for="doctor_id" class="col-sm-2 col-form-label">Doctor Id</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="doctor_id" name="doctor_id" value="<?= set_value('doctor_id'); ?>">
+                        <select class="form-control" name="doctor_id" id="doctor_id">
+                                <?php foreach ($data_doctor as $dct) : ?>
+                                    <option value="<?= $dct['doctor_id'] ?>"><?= $dct['doctor_id'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
                             <small class="text-danger">
                                 <?php echo form_error('doctor_id') ?>
                             </small>
@@ -112,7 +116,11 @@
                     <div class="form-group row">
                         <label for="action_id" class="col-sm-2 col-form-label">Action Id</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="action_id" name="action_id" value="<?= set_value('action_id'); ?>">
+                        <select class="form-control" name="action_id" id="action_id">
+                                <?php foreach ($data_action as $act) : ?>
+                                    <option value="<?= $act['action_id'] ?>"><?= $act['action_id'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
                             <small class="text-danger">
                                 <?php echo form_error('action_id') ?>
                             </small>

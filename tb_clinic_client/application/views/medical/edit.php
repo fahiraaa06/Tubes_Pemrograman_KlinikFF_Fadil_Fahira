@@ -2,8 +2,8 @@
     <h3><?= $title ?></h3>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb ">
-            <li class="breadcrumb-item"><a>Patience</a></li>
-            <li class="breadcrumb-item "><a href="<?= base_url('patience'); ?>">List Data</a></li>
+            <li class="breadcrumb-item"><a>Medical</a></li>
+            <li class="breadcrumb-item "><a href="<?= base_url('medical'); ?>">List Data</a></li>
             <li class="breadcrumb-item active" aria-current="page">Edit Data</li>
         </ol>
     </nav>
@@ -15,85 +15,121 @@
                     //create form
                     $attributes = array('method' => "post", "autocomplete" => "off");
                     echo form_open('', $attributes); ?>
+                    <?php foreach ($data_medical as $data_medical) : ?>
                     <div class="form-group row">
-                        <label for="patience_id" class="col-sm-2 col-form-label">Patience Id</label>
+                        <label for="medical_id" class="col-sm-2 col-form-label">Medical Id</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="patience_id" name="patience_id" value=" <?= $data_patience['patience_id']; ?>" readonly>
+                            <input type="text" class="form-control" id="medical_id" name="medical_id" value=" <?= $data_medical['medical_id']; ?>" readonly>
+                            <small class="text-danger">
+                                <?php echo form_error('medical_id') ?>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="medical_date" class="col-sm-2 col-formlabel">Medical Date</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="medical_date" name="medical_date" value=" <?= $data_medical['medical_date']; ?>">
+                            <small class="text-danger">
+                                <?php echo form_error('medical_date') ?>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="medical_diagnose" class="col-sm-2 col-formlabel">Medical Diagnose</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="medical_diagnose" name="medical_diagnose" value=" <?= $data_medical['medical_diagnose']; ?>">
+                            <small class="text-danger">
+                                <?php echo form_error('medical_diagnose') ?>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="medical_temperature" class="col-sm-2 col-formlabel">Medical Temperature</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="medical_temperature" name="medical_temperature" value=" <?= $data_medical['medical_temperature']; ?>">
+                            <small class="text-danger">
+                                <?php echo form_error('medical_temperature') ?>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="medical_blood_pressure" class="col-sm-2 col-formlabel">Medical Blood Pressure</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="medical_blood_pressure" name="medical_blood_pressure" value=" <?= $data_medical['medical_blood_pressure']; ?>">
+                            <small class="text-danger">
+                                <?php echo form_error('medical_blood_pressure') ?>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="medical_price" class="col-sm-2 col-formlabel">Medical Price</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="medical_price" name="medical_price" value=" <?= $data_medical['medical_price']; ?>">
+                            <small class="text-danger">
+                                <?php echo form_error('medical_price') ?>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="medical_status" class="col-sm-2 col-formlabel">Medical Status</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="medical_status" name="medical_status">
+                                <option value="Sudah Diperiksa" selected disabled>Pilih</option>
+                                <option value="Sudah Diperiksa" <?php if ($data_medical['medical_status'] == "Sudah Diperiksa") : echo "selected"; endif; ?>>Sudah Diperiksa</option>
+                                <option value="Belum Diperiksa" <?php if ($data_medical['medical_status'] == "Belum Diperiksa") : echo "selected"; endif; ?>>Belum Diperiksa</option>
+                                <option value="Sedang Diperiksa" <?php if ($data_medical['medical_status'] == "Sedang Diperiksa") : echo "selected"; endif; ?>>Sedang Diperiksa</option>
+                            </select>
+                            <small class="text-danger">
+                                <?php echo form_error('medical_status') ?>
+                            </small>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group row">
+                    <label for="patience_id" class="col-sm-2 col-form-label">Patience ID</label>
+                    <div class="col-sm-5">
+                            <select class="form-control" id="patience_id" name="patience_id">
+                                <?php 
+                                foreach ($data_patience as $row) :
+                                ?>
+                                <option value="<?= $row['patience_id'] ?>" <?php if ($data_medical['patience_id'] == $row['patience_id']) : echo "selected"; endif; ?>> <?= $row['patience_id'] ?> </option>
+                                <?php endforeach; ?>
+                            </select>
                             <small class="text-danger">
                                 <?php echo form_error('patience_id') ?>
                             </small>
                         </div>
                     </div>
+
                     <div class="form-group row">
-                        <label for="patience_name" class="col-sm-2 col-formlabel">Patience Name</label>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" id="patience_name" name="patience_name" value=" <?= $data_patience['patience_name']; ?>">
-                            <small class="text-danger">
-                                <?php echo form_error('patience_name') ?>
-                            </small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="patience_address" class="col-sm-2 col-formlabel">Patience Address</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="patience_address" name="patience_address" rows="3"><?= $data_patience['patience_address']; ?></textarea>
-                            <small class="text-danger">
-                                <?php echo form_error('patience_address') ?>
-                            </small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="patience_blood" class="col-sm-2 col-formlabel">Patience Blood</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="patience_blood" name="patience_blood">
-                                <option value="A" selected disabled>Pilih</option>
-                                <option value="A" <?php if ($data_patience['patience_blood'] == "A") : echo "selected"; endif; ?>>A</option>
-                                <option value="B" <?php if ($data_patience['patience_blood'] == "B") : echo "selected"; endif; ?>>B</option>
-                                <option value="O" <?php if ($data_patience['patience_blood'] == "O") : echo "selected"; endif; ?>>O</option>
-                                <option value="AB" <?php if ($data_patience['patience_blood'] == "AB") : echo "selected"; endif; ?>>AB</option>
+                    <label for="doctor_id" class="col-sm-2 col-form-label">Doctor ID</label>
+                    <div class="col-sm-5">
+                            <select class="form-control" id="doctor_id" name="doctor_id">
+                                <?php 
+                                foreach ($data_doctor as $row) :
+                                ?>
+                                <option value="<?= $row['doctor_id'] ?>" <?php if ($data_medical['doctor_id'] == $row['doctor_id']) : echo "selected"; endif; ?>> <?= $row['doctor_id'] ?> </option>
+                                <?php endforeach; ?>
                             </select>
                             <small class="text-danger">
-                                <?php echo form_error('patience_blood') ?>
+                                <?php echo form_error('doctor_id') ?>
                             </small>
                         </div>
                     </div>
+
                     <div class="form-group row">
-                        <label for="patience_age" class="col-sm-2 col-formlabel">Patience Age</label>
-                        <div class="col-sm-5">
-                            <textarea class="form-control" id="patience_age" name="patience_age" rows="3"><?= $data_patience['patience_age']; ?></textarea>
+                    <label for="action_id" class="col-sm-2 col-form-label">Action ID</label>
+                    <div class="col-sm-5">
+                            <select class="form-control" id="action_id" name="action_id">
+                                <?php 
+                                foreach ($data_action as $row) :
+                                ?>
+                                <option value="<?= $row['action_id'] ?>" <?php if ($data_medical['action_id'] == $row['action_id']) : echo "selected"; endif; ?>> <?= $row['action_id'] ?> </option>
+                                <?php endforeach; ?>
+                            </select>
                             <small class="text-danger">
-                                <?php echo form_error('patience_age') ?>
-                            </small>
-                        </div>
-                    </div>
-                    <fieldset class="form-group">
-                        <div class="row">
-                            <legend class="col-form-label col-sm-2 pt-0">Patience Gender</legend>
-                            <div class="col-sm-5">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="patience_gender" name="patience_gender" value="L" <?php if ($data_patience['patience_gender'] == "L") : echo "checked"; endif; ?>>
-                                    <label class="form-check-label" for="patience_gender">
-                                        L
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" id="patience_gender2" name="patience_gender" value="P" <?php if ($data_patience['patience_gender'] == "P") : echo "checked"; endif; ?>>
-                                    <label class="form-check-label" for="patience_gender2">
-                                        P
-                                    </label>
-                                </div>
-                                <small class="text-danger">
-                                    <?php echo form_error('patience_gender') ?>
-                                </small>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <div class="form-group row">
-                        <label for="patience_phone" class="col-sm-2 col-formlabel">Patience Phone</label>
-                        <div class="col-sm-5">
-                            <textarea class="form-control" id="patience_phone" name="patience_phone" rows="3"><?= $data_patience['patience_phone']; ?></textarea>
-                            <small class="text-danger">
-                                <?php echo form_error('patience_phone') ?>
+                                <?php echo form_error('action_id') ?>
                             </small>
                         </div>
                     </div>
@@ -103,6 +139,7 @@
                             <a class="btn btn-secondary" href="javascript:history.back()">Kembali</a>
                         </div>
                     </div>
+                    <?php endforeach; ?>
                     </form>
                 </div>
             </div>
