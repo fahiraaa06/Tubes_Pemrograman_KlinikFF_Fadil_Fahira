@@ -12,11 +12,23 @@ class Transaction_model extends CI_Model
         if ($transaction_id) {
             $this->db->where('transaction_id', $transaction_id);
         }
+        //registry ka transaction
         $this->db->join('registry', 'registry.registry_id = transaction.registry_id');
-        $this->db->join('recipe', 'recipe.recipe_id = transaction.recipe_id');
-        $this->db->join('medical_record', 'medical_record.medical_id = transaction.medical_id');
-        $this->db->select('transaction_id, transaction_date, transaction_total, medical_record.medical_id,
-         registry.registry_id,recipe.recipe_id');
+        //medical ka registry
+        $this->db->join('medical_record', 'medical_record.medical_id = registry.medical_id');
+        //patience ka registry
+        $this->db->join('patience', 'patience.patience_id = registry.patience_id');
+        //doctor ka registry
+        $this->db->join('doctor', 'doctor.doctor_id = registry.doctor_id'); 
+        //action ka medical
+        $this->db->join('action', 'action.action_id = medical_record.action_id');
+        //recipe ka medical
+        $this->db->join('recipe', 'medical_record.medical_id = recipe.medical_id');
+        //medicine ka recipe
+        $this->db->join('medicine', 'medicine.medicine_id = recipe.medicine_id');
+        $this->db->select('transaction_id, transaction_date, transaction_total, registry.registry_id,registry.registry_price,
+        patience.patience_name,doctor.doctor_name,medical_record.medical_diagnose,medical_record.medical_price,
+        action.action_name,action.action_price,recipe.recipe_total');
         $query = $this->db->get()->result_array();
         return $query;
     }

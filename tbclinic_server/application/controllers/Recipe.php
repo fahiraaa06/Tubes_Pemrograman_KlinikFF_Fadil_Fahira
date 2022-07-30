@@ -46,7 +46,7 @@ function rcp_post()
 {
     $data = array(
         'recipe_id' => $this->post('recipe_id'),
-        'recipe_amount' => $this->post('recipe_amount'),
+        'recipe_qty' => $this->post('recipe_qty'),
         'recipe_total' => $this->post('recipe_total'),
         'medicine_id' => $this->post('medicine_id'),
         'medical_id' => $this->post('medical_id')
@@ -56,7 +56,7 @@ function rcp_post()
 
     //Jika semua data wajib diisi
     if (
-        $data['recipe_id'] == NULL || $data['recipe_amount'] == NULL || $data['recipe_total'] == NULL || $data['medicine_id'] == NULL || $data['medical_id'] == NULL  
+        $data['recipe_id'] == NULL || $data['recipe_qty'] == NULL || $data['recipe_total'] == NULL || $data['medicine_id'] == NULL || $data['medical_id'] == NULL  
     ) {
 
         $this->response(
@@ -103,7 +103,7 @@ function rcp_put()
     $recipe_id = $this->put('recipe_id');
     $data = array(
         'recipe_id' => $this->put('recipe_id'),
-        'recipe_amount' => $this->put('recipe_amount'),
+        'recipe_qty' => $this->put('recipe_qty'),
         'recipe_total' => $this->put('recipe_total'),
         'medicine_id' => $this->put('medicine_id'),
         'medical_id' => $this->put('medical_id')

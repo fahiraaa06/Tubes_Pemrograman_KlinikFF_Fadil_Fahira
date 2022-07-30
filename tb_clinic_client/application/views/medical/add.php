@@ -137,3 +137,19 @@
         </div>
     </div>
 </div>
+<script>
+    $('#action_id').change(function () {
+        var action_id = $('#action_id').val();
+
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost/Tubes_Pemrograman_KlinikFF_Fadil_Fahira/tbclinic_server/action/getharga?action_id='+action_id,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader ("Authorization", "Basic " + btoa("ulbi" + ":" + "pemrograman3"));
+            },
+            success: function (data) {
+                $('#action_price').val(data.data.harga)
+            }
+        })
+    })
+</script>

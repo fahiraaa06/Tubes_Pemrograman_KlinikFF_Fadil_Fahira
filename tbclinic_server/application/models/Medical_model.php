@@ -13,12 +13,17 @@ class Medical_model extends CI_Model
         if ($medical_id) {
             $this->db->where('medical_id', $medical_id);
         }
-        $this->db->join('patience', 'patience.patience_id = medical_record.patience_id');
-        $this->db->join('doctor', 'doctor.doctor_id = medical_record.doctor_id');
+        //registry ka medical 
+        $this->db->join('registry', 'registry.registry_id = medical_record.registry_id');
+        //patience ka registry
+        $this->db->join('patience', 'patience.patience_id = registry.patience_id');
+        //doctor ka registry
+        $this->db->join('doctor', 'doctor.doctor_id = registry.doctor_id');
+        //action ka medical
         $this->db->join('action', 'action.action_id = medical_record.action_id');
+ 
         $this->db->select('medical_id, medical_date, medical_diagnose, medical_temperature,
-         medical_blood_pressure,medical_price,medical_status,patience.patience_id,
-         patience.patience_name,doctor.doctor_id,doctor.doctor_name,action.action_id,action.action_name,action.action_price');
+         medical_blood_pressure,medical_price,medical_status,registry.registry_id,patience.patience_id,patience.patience_name,doctor.doctor_id,doctor.doctor_name,action.action_id,action.action_name,action.action_price');
         $query = $this->db->get()->result_array();
         return $query;
     }

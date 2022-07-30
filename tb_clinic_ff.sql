@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Jul 2022 pada 11.26
+-- Waktu pembuatan: 30 Jul 2022 pada 08.41
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.28
 
@@ -75,8 +75,7 @@ CREATE TABLE `medical_record` (
   `medical_blood_pressure` varchar(50) NOT NULL,
   `medical_price` varchar(100) NOT NULL,
   `medical_status` varchar(50) NOT NULL,
-  `patience_id` varchar(10) NOT NULL,
-  `doctor_id` varchar(10) NOT NULL,
+  `registry_id` varchar(10) NOT NULL,
   `action_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -84,9 +83,8 @@ CREATE TABLE `medical_record` (
 -- Dumping data untuk tabel `medical_record`
 --
 
-INSERT INTO `medical_record` (`medical_id`, `medical_date`, `medical_diagnose`, `medical_temperature`, `medical_blood_pressure`, `medical_price`, `medical_status`, `patience_id`, `doctor_id`, `action_id`) VALUES
-('MED3456', '2022-07-19', 'Demam dan pusing', '37 derajat', '120/90', '75000', 'Sudah diperiksa', 'PTC1456', 'DOC1114', 'ACT2345'),
-('MED3567', '2022-07-22', 'Demam ', '39 derajat', '130/100', '80000', 'diperiksa', 'PTC1722', 'DOC1114', 'ACT2345');
+INSERT INTO `medical_record` (`medical_id`, `medical_date`, `medical_diagnose`, `medical_temperature`, `medical_blood_pressure`, `medical_price`, `medical_status`, `registry_id`, `action_id`) VALUES
+('MED3456', '2022-07-29', 'Demam', '37 derajat', '120/90', '4500', 'Sudah diperiksa', 'REG1245', 'ACT2345');
 
 -- --------------------------------------------------------
 
@@ -106,7 +104,8 @@ CREATE TABLE `medicine` (
 --
 
 INSERT INTO `medicine` (`medicine_id`, `medicine_name`, `medicine_category`, `medicine_price`) VALUES
-('MED1234', 'Paramex', 'Tablet', '4500');
+('MDC1', 'Paramex', 'Tablet', '5000'),
+('MDC2', 'Paracetamol', 'Tablet', '5000');
 
 -- --------------------------------------------------------
 
@@ -130,8 +129,7 @@ CREATE TABLE `patience` (
 
 INSERT INTO `patience` (`patience_id`, `patience_name`, `patience_address`, `patience_blood`, `patience_age`, `patience_gender`, `patience_phone`) VALUES
 ('PTC1456', 'Marrisa', 'Bandung', 'A', '18', 'P', '085262774356'),
-('PTC1722', 'Cha cha', 'Medan', 'B', '25', 'P', '085262777867'),
-('PTC1789', 'Fadil Febriansyah', 'Sariasih', 'B', '20', 'L', '085262777878');
+('PTC1722', 'Cha cha', 'Medan', 'B', '25', 'P', '085262777867');
 
 -- --------------------------------------------------------
 
@@ -141,7 +139,7 @@ INSERT INTO `patience` (`patience_id`, `patience_name`, `patience_address`, `pat
 
 CREATE TABLE `recipe` (
   `recipe_id` varchar(50) NOT NULL,
-  `recipe_amount` varchar(50) NOT NULL,
+  `recipe_qty` varchar(50) NOT NULL,
   `recipe_total` varchar(50) NOT NULL,
   `medicine_id` varchar(50) NOT NULL,
   `medical_id` varchar(50) NOT NULL
@@ -151,8 +149,9 @@ CREATE TABLE `recipe` (
 -- Dumping data untuk tabel `recipe`
 --
 
-INSERT INTO `recipe` (`recipe_id`, `recipe_amount`, `recipe_total`, `medicine_id`, `medical_id`) VALUES
-('REC1234', '1', '7500', 'MED1234', 'MED3456');
+INSERT INTO `recipe` (`recipe_id`, `recipe_qty`, `recipe_total`, `medicine_id`, `medical_id`) VALUES
+('REC1', '3', '30000', 'MDC1', 'MED3456'),
+('REC2', '3', '30000', 'MDC2', 'MED3456');
 
 -- --------------------------------------------------------
 
@@ -186,17 +185,8 @@ CREATE TABLE `transaction` (
   `transaction_id` varchar(10) NOT NULL,
   `transaction_date` date NOT NULL,
   `transaction_total` varchar(50) NOT NULL,
-  `medical_id` varchar(10) NOT NULL,
-  `registry_id` varchar(10) NOT NULL,
-  `recipe_id` varchar(10) NOT NULL
+  `registry_id` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `transaction`
---
-
-INSERT INTO `transaction` (`transaction_id`, `transaction_date`, `transaction_total`, `medical_id`, `registry_id`, `recipe_id`) VALUES
-('TRAN2345', '2022-07-19', '100000', 'MED3456', 'REG1245', 'REC1234');
 
 --
 -- Indexes for dumped tables
@@ -220,8 +210,7 @@ ALTER TABLE `doctor`
 ALTER TABLE `medical_record`
   ADD PRIMARY KEY (`medical_id`),
   ADD KEY `action_id` (`action_id`),
-  ADD KEY `doctor_id` (`doctor_id`),
-  ADD KEY `patience_id` (`patience_id`);
+  ADD KEY `medical_record_ibfk_3` (`registry_id`);
 
 --
 -- Indeks untuk tabel `medicine`
@@ -256,8 +245,6 @@ ALTER TABLE `registry`
 --
 ALTER TABLE `transaction`
   ADD PRIMARY KEY (`transaction_id`),
-  ADD KEY `medical_id` (`medical_id`),
-  ADD KEY `recipe_id` (`recipe_id`),
   ADD KEY `registry_id` (`registry_id`);
 
 --
@@ -269,8 +256,7 @@ ALTER TABLE `transaction`
 --
 ALTER TABLE `medical_record`
   ADD CONSTRAINT `medical_record_ibfk_1` FOREIGN KEY (`action_id`) REFERENCES `action` (`action_id`),
-  ADD CONSTRAINT `medical_record_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`doctor_id`),
-  ADD CONSTRAINT `medical_record_ibfk_3` FOREIGN KEY (`patience_id`) REFERENCES `patience` (`patience_id`);
+  ADD CONSTRAINT `medical_record_ibfk_3` FOREIGN KEY (`registry_id`) REFERENCES `registry` (`registry_id`);
 
 --
 -- Ketidakleluasaan untuk tabel `recipe`
@@ -290,8 +276,6 @@ ALTER TABLE `registry`
 -- Ketidakleluasaan untuk tabel `transaction`
 --
 ALTER TABLE `transaction`
-  ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`medical_id`) REFERENCES `medical_record` (`medical_id`),
-  ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`recipe_id`),
   ADD CONSTRAINT `transaction_ibfk_3` FOREIGN KEY (`registry_id`) REFERENCES `registry` (`registry_id`);
 COMMIT;
 

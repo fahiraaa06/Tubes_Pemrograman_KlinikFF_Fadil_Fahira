@@ -172,5 +172,30 @@ function act_delete()
         );
     }
 } 
+function getharga_get() {
+    $action_id = $this->get('action_id');
+    $data = $this->Action_model->getHarga($action_id);
+    //jika variabel $data terdapat data didalamnya 
+    if ($data) {
+        $this->response(
+            [
+                'data' => $data,
+                'status' => 'success',
+                'response_code' => RestController::HTTP_OK
+            ],
+            RestController::HTTP_OK
+        );
+        //jika data tidak ada
+    } else {
+        $this->response(
+            [
+                'status' => false,
+                'message' => 'Data Tidak Ada',
+                'response_code' => RestController::HTTP_NOT_FOUND
+            ],
+            RestController::HTTP_OK
+        );
+    }
+}
 }  
 ?>

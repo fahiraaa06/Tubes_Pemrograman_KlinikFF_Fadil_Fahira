@@ -3,7 +3,7 @@
     <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb ">
-            <li class="breadcrumb-item"><a>Action</a></li>
+            <li class="breadcrumb-item"><a>Tindakan</a></li>
             <li class="breadcrumb-item active" aria-current="page">List Data</li>
         </ol>
     </nav>
@@ -62,7 +62,8 @@
     $('#tableACTION').DataTable();
 </script>
 
-</div>
+
+            </div>
             <!-- End of Main Content -->
 
         </div>

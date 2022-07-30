@@ -1,12 +1,5 @@
 <div class="container pt-5">
     <h3><?= $title ?></h3>
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb ">
-            <li class="breadcrumb-item"><a>Patience</a></li>
-            <li class="breadcrumb-item "><a href="<?= base_url('patience'); ?>">List Data</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Data</li>
-        </ol>
-    </nav>
     <div class="row">
         <div class="col-md-12">
             <div class="card">

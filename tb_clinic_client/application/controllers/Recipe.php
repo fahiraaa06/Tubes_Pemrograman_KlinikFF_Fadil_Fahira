@@ -46,7 +46,7 @@ class Recipe extends CI_Controller
       
 
       $this->form_validation->set_rules('recipe_id', 'Recipe ID', 'trim|required');
-      $this->form_validation->set_rules('recipe_amount', 'Recipe Amount', 'trim|required');
+      $this->form_validation->set_rules('recipe_qty', 'Recipe qty', 'trim|required');
       $this->form_validation->set_rules('recipe_total', 'Recipe Total', 'trim|required');
       $this->form_validation->set_rules('medicine_id', 'Medicine ID', 'trim|required');
       $this->form_validation->set_rules('medical_id', 'Medical ID', 'trim|required');
@@ -59,7 +59,7 @@ class Recipe extends CI_Controller
       } else {
          $data = [
             "recipe_id" => $this->input->post('recipe_id'),
-            "recipe_amount" => $this->input->post('recipe_amount'),
+            "recipe_qty" => $this->input->post('recipe_qty'),
             "recipe_total" => $this->input->post('recipe_total'),
             "medicine_id" => $this->input->post('medicine_id'),
             "medical_id" => $this->input->post('medical_id'),
@@ -89,7 +89,7 @@ class Recipe extends CI_Controller
       $data['data_medical'] = $this->Medical_model->getAll();
 
       $this->form_validation->set_rules('recipe_id', 'Recipe ID', 'trim|required');
-      $this->form_validation->set_rules('recipe_amount', 'Recipe Amount', 'trim|required');
+      $this->form_validation->set_rules('recipe_qty', 'Recipe qty', 'trim|required');
       $this->form_validation->set_rules('recipe_total', 'Recipe Total', 'trim|required');
       $this->form_validation->set_rules('medicine_id', 'Medicine ID', 'trim|required');
       $this->form_validation->set_rules('medical_id', 'Medical ID', 'trim|required');
@@ -102,7 +102,7 @@ class Recipe extends CI_Controller
       } else {
          $data = [
             "recipe_id" => $this->input->post('recipe_id'),
-            "recipe_amount" => $this->input->post('recipe_amount'),
+            "recipe_qty" => $this->input->post('recipe_qty'),
             "recipe_total" => $this->input->post('recipe_total'),
             "medicine_id" => $this->input->post('medicine_id'),
             "medical_id" => $this->input->post('medical_id'),
