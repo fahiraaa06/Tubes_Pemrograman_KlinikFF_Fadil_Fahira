@@ -33,7 +33,6 @@
                                     <th>MEDICAL TEMPERATURE</th>
                                     <th>MEDICAL BLOOD PRESSURE</th>
                                     <th>MEDICAL PRICE</th>
-                                    <th>MEDICAL STATUS</th>
                                     <th>REGISTRY ID</th>
                                     <th>ACTION ID</th>
                                     <th>ACTION</th>
@@ -50,7 +49,6 @@
                                         <td><?= $row['medical_temperature'] ?></td>
                                         <td><?= $row['medical_blood_pressure'] ?></td>
                                         <td><?= $row['medical_price'] ?></td>
-                                        <td><?= $row['medical_status'] ?></td>
                                         <td><?= $row['registry_id'] ?></td>
                                         <td><?= $row['action_id'] ?></td>
                                        
