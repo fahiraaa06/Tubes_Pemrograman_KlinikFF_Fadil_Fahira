@@ -1,4 +1,4 @@
-<div class="container pt-5">
+<div class="container pt-5" id="app">
     <h3><?= $title ?></h3>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb ">
@@ -22,6 +22,20 @@
                             <input type="text" class="form-control" id="medical_id" name="medical_id" value="<?= set_value('medical_id'); ?>">
                             <small class="text-danger">
                                 <?php echo form_error('medical_id') ?>
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="registry_id" class="col-sm-2 col-form-label">Registry Id</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" name="registry_id" id="registry_id">
+                                <?php foreach ($data_registry as $rgs) : ?>
+                                    <option value="<?= $rgs['registry_id'] ?>"><?= $rgs['registry_id'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <small class="text-danger">
+                                <?php echo form_error('registry_id') ?>
                             </small>
                         </div>
                     </div>
@@ -65,60 +79,20 @@
                     <div class="form-group row">
                         <label for="medical_price" class="col-sm-2 col-form-label">Medical Price</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="medical_price" name="medical_price" value="<?= set_value('medical_price'); ?>">
+                            <input type="number" class="form-control" id="medical_price" name="medical_price">
                             <small class="text-danger">
                                 <?php echo form_error('medical_price') ?>
                             </small>
                         </div>
                     </div>
-                    
+
                     <div class="form-group row">
-                        <label for="medical_status" class="col-sm-2 col-form-label">Medical Status</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="medical_status" name="medical_status">
-                                <option value="Sudah Diperiksa" selected disabled>Pilih</option>
-                                <option value="Sudah Diperiksa" <?php if (set_value('medical_status') == "Sudah Diperiksa") : echo "selected"; endif; ?>>Sudah Diperiksa</option>
-                                <option value="Belum Diperiksa" <?php if (set_value('medical_status') == "Belum Diperiksa") : echo "selected"; endif; ?>>Belum Diperiksa</option>
-                                <option value="Sedang Diperiksa" <?php if (set_value('medical_status') == "Sedang Diperiksa") : echo "selected"; endif; ?>>Sedang Diperiksa</option>
-                            </select>
-                            <small class="text-danger">
-                                <?php echo form_error('medical_status') ?>
-                            </small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="patience_id" class="col-sm-2 col-form-label">Patience Id</label>
+                        <label for="action_id" class="col-sm-2 col-form-label">Tindakan</label>
                         <div class="col-sm-5">
-                            <select class="form-control" name="patience_id" id="patience_id">
-                                <?php foreach ($data_patience as $ptc) : ?>
-                                    <option value="<?= $ptc['patience_id'] ?>"><?= $ptc['patience_id'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <small class="text-danger">
-                                <?php echo form_error('patience_id') ?>
-                            </small>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <label for="doctor_id" class="col-sm-2 col-form-label">Doctor Id</label>
-                        <div class="col-sm-5">
-                        <select class="form-control" name="doctor_id" id="doctor_id">
-                                <?php foreach ($data_doctor as $dct) : ?>
-                                    <option value="<?= $dct['doctor_id'] ?>"><?= $dct['doctor_id'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <small class="text-danger">
-                                <?php echo form_error('doctor_id') ?>
-                            </small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="action_id" class="col-sm-2 col-form-label">Action Id</label>
-                        <div class="col-sm-5">
-                        <select class="form-control" name="action_id" id="action_id">
+                            <select class="form-control" name="action_id" id="action_id">
+                            <option value="">Silahkan Pilih Tindakan</option>
                                 <?php foreach ($data_action as $act) : ?>
-                                    <option value="<?= $act['action_id'] ?>"><?= $act['action_id'] ?></option>
+                                    <option value="<?= $act['action_id'] ?>"><?= $act['action_name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <small class="text-danger">
@@ -126,16 +100,79 @@
                             </small>
                         </div>
                     </div>
-                        <div class="col-sm-10 offset-md-2">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                            <a class="btn btn-secondary" href="javascript:history.back()">Kembali</a>
+
+                        <div class="form-group row">
+                            <label for="harga_aksi" class="col-sm-2 col-form-label">Harga Tindakan</label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control" id="harga_aksi" name="harga_aksi" value="" disabled>
+                            </div>
                         </div>
+                        
+                        <a href="#" class="btn btn-primary" v-on:click="RecipeObat">coba vue</a href="#">
+                        <div class="form-group row card border-success">
+                            <div class="card-header bg-success text-white">
+                                Resep Obat
+                            </div>
+                            <div class="card-body">
+                                <form method="post" action="<?= base_url('recipe'); ?>">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <select name="medicine" id="medicine" class="form-control">
+                                                    <?php foreach ($data_medicine as $mdc) { ?>
+                                                        <option value="<?= $mdc['medicine_id']; ?>"><?= $mdc['medicine_name']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label for="recipe_qty"> </label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" id="recipe_qty" name="recipe_qty" value="<?= set_value('recipe_qty'); ?>">
+                                                    <small class="text-danger">
+                                                        <?php echo form_error('recipe_qty') ?>
+                                                    </small>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <button type="submit" class="btn btn-success">+</button>
+                                            </div>
+                                        </div>
+
+                                </form>
+
+                                <hr>
+                                <table class="table table-striped table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Nama Obat</th>
+                                            <th>Harga Obat</th>
+                                            <th>Qty</th>
+                                            <th>Total</th>
+                                            <th>#</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="">
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
-                    </form>
+                    <div class="col-sm-10 offset-md-2">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <a class="btn btn-secondary" href="javascript:history.back()">Kembali</a>
+                    </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 <script>
     $('#action_id').change(function () {
@@ -143,13 +180,55 @@
 
         $.ajax({
             type: 'GET',
-            url: 'http://localhost/Tubes_Pemrograman_KlinikFF_Fadil_Fahira/tbclinic_server/action/getharga?action_id='+action_id,
+            url: 'http://localhost/Tubes_Pemrograman_KlinikFF_Fadil_Fahira/tbclinic_server/action/getharga?KEY=ulbi123&action_id'+action_id,
             beforeSend: function (xhr) {
                 xhr.setRequestHeader ("Authorization", "Basic " + btoa("ulbi" + ":" + "pemrograman3"));
             },
             success: function (data) {
-                $('#action_price').val(data.data.harga)
+                $('#harga_aksi').val(data.data.action_price)
             }
         })
+    })
+</script>
+
+<script src="<?= base_url('assets/vue.js'); ?>"></script>
+<script>
+    var app = new Vue({
+
+        el: '#app',
+        data: {
+            tabledata: []
+        },
+        methods: {
+            RecipeObat: function() {
+                var medicine_id = $('#medicine').val()
+                var recipe_qty = $('#recipe_qty').val()
+                var recipe_total = 0
+                var medicine_price = 0
+                var fillTableData = []
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost/Tubes_Pemrograman_KlinikFF_Fadil_Fahira/tbclinic_server/medicine/getharga?KEY=ulbi123&medicine_id=' + medicine_id,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + btoa("ulbi" + ":" + "pemrograman3"));
+                    },
+                    success: function(data) {
+                        medicine_price = data.data.medicine_price
+                        recipe_total = recipe_qty * medicine_price
+                        var obj = {
+                            nama_obat: data.data.medicine_name,
+                            harga_obat: medicine_price,
+                            qty: recipe_qty,
+                            total: recipe_total
+                        }
+                        fillTableData.push(obj)
+                        console.log(fillTableData[0])
+                    }
+
+                })
+                console.log(fillTableData[0])
+            }
+        }  
     })
 </script>

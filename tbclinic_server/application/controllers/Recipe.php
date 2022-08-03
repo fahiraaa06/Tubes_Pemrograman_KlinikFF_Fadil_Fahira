@@ -45,18 +45,17 @@ public function rcp_get()
 function rcp_post()
 {
     $data = array(
-        'recipe_id' => $this->post('recipe_id'),
         'recipe_qty' => $this->post('recipe_qty'),
         'recipe_total' => $this->post('recipe_total'),
         'medicine_id' => $this->post('medicine_id'),
         'medical_id' => $this->post('medical_id')
     );
 
-    $cek_data = $this->Recipe_model->getDataRecipe($this->post('recipe_id'));
+    // $cek_data = $this->Recipe_model->getDataRecipe($this->post('recipe_id'));
 
     //Jika semua data wajib diisi
     if (
-        $data['recipe_id'] == NULL || $data['recipe_qty'] == NULL || $data['recipe_total'] == NULL || $data['medicine_id'] == NULL || $data['medical_id'] == NULL  
+        $data['recipe_qty'] == NULL ||  $data['medicine_id'] == NULL || $data['medical_id'] == NULL  
     ) {
 
         $this->response(
@@ -68,7 +67,7 @@ function rcp_post()
             RestController::HTTP_BAD_REQUEST
         );
         //Jika data duplikat
-    } else if ($cek_data) {
+    } /*else if ($cek_data) {
         $this->response(
             [
                 'status' => false,
@@ -78,7 +77,7 @@ function rcp_post()
             RestController::HTTP_BAD_REQUEST
         );
         //Jika data tersimpan
-    } elseif ($this->Recipe_model->insertRecipe($data) > 0) {
+    }*/ elseif ($this->Recipe_model->insertRecipe($data) > 0) {
         $this->response(
             [
                 'status' => true,

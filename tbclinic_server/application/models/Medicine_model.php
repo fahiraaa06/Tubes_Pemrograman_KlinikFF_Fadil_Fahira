@@ -51,4 +51,12 @@ class Medicine_model extends CI_Model
         return $this->db->affected_rows();
         // return $query;
     }
+
+    public function getHarga($medicine_id) {
+        $this->db->from('medicine');
+        $this->db->select('medicine_price, medicine_name');
+        $this->db->where('medicine_id', $medicine_id);
+        $query = $this->db->get()->row_array();
+        return $query;
+    }
 }

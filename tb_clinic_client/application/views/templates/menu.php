@@ -76,17 +76,6 @@
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
-            
-              <!-- Nav Item - Recipe -->
-              <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('recipe'); ?>">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Resep Obat</span></a>
-            </li>
-            
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
             <!-- Nav Item - Medicine -->
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('medicine'); ?>">

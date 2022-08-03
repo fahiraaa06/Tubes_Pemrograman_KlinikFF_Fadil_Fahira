@@ -45,9 +45,7 @@ class Recipe extends CI_Controller
       $data['data_medical'] = $this->Medical_model->getAll();
       
 
-      $this->form_validation->set_rules('recipe_id', 'Recipe ID', 'trim|required');
       $this->form_validation->set_rules('recipe_qty', 'Recipe qty', 'trim|required');
-      $this->form_validation->set_rules('recipe_total', 'Recipe Total', 'trim|required');
       $this->form_validation->set_rules('medicine_id', 'Medicine ID', 'trim|required');
       $this->form_validation->set_rules('medical_id', 'Medical ID', 'trim|required');
 
@@ -128,10 +126,10 @@ class Recipe extends CI_Controller
       $update = $this->Recipe_model->delete($recipe_id);
       if ($update['response_code'] === 200) {
          $this->session->set_flashdata('flash', 'Data Dihapus');
-         redirect('recipe');
+         redirect('medical');
       } else {
          $this->session->set_flashdata('message', 'Gagal!!');
-         redirect('recipe');
+         redirect('medical');
       }
    }
 }

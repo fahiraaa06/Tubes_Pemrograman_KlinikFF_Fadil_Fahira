@@ -52,18 +52,18 @@ function mdc_post()
         'medical_blood_pressure' => $this->post('medical_blood_pressure'),
         'medical_price' => $this->post('medical_price'),
         'medical_status' => $this->post('medical_status'),
-        'patience_id' => $this->post('patience_id'),
-        'doctor_id' => $this->post('doctor_id'),
+        'medical_total' => $this->post('medical_total'),
+        'registry_id' => $this->post('registry_id'),
         'action_id' => $this->post('action_id')
     );
 
-    $cek_data = $this->Medical_model->getDataMedical($this->post('medical_id'));
+    // $cek_data = $this->Medical_model->getDataMedical($this->post('medical_id'));
 
     //Jika semua data wajib diisi
     if (
-        $data['medical_id'] == NULL  || $data['medical_date'] == NULL  || $data['medical_diagnose'] == NULL
+         $data['medical_date'] == NULL  || $data['medical_diagnose'] == NULL
         || $data['medical_temperature'] == NULL || $data['medical_blood_pressure'] == NULL || $data['medical_price'] == NULL || 
-        $data['medical_status'] == NULL || $data['patience_id'] == NULL || $data['doctor_id'] == NULL || $data['action_id'] == NULL
+        $data['medical_status'] == NULL || $data['registry_id'] == NULL || $data['action_id'] == NULL 
     ) {
 
         $this->response(
@@ -75,7 +75,7 @@ function mdc_post()
             RestController::HTTP_BAD_REQUEST
         );
         //Jika data duplikat
-    } else if ($cek_data) {
+    } /*else if ($cek_data) {
         $this->response(
             [
                 'status' => false,
@@ -85,7 +85,7 @@ function mdc_post()
             RestController::HTTP_BAD_REQUEST
         );
         //Jika data tersimpan
-    } elseif ($this->Medical_model->insertMedical($data) > 0) {
+    }*/ elseif ($this->Medical_model->insertMedical($data) > 0) {
         $this->response(
             [
                 'status' => true,
@@ -116,8 +116,6 @@ function mdc_put()
         'medical_blood_pressure' => $this->put('medical_blood_pressure'),
         'medical_price' => $this->put('medical_price'),
         'medical_status' => $this->put('medical_status'),
-        'patience_id' => $this->put('patience_id'),
-        'doctor_id' => $this->put('doctor_id'),
         'action_id' => $this->put('action_id')
     );
     //Jika field medical_id tidak diisi

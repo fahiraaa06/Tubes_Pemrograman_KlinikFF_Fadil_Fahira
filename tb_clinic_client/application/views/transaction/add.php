@@ -46,20 +46,6 @@
                     </div>
                     
                     <div class="form-group row">
-                        <label for="medical_id" class="col-sm-2 col-form-label">Medical Id</label>
-                        <div class="col-sm-5">
-                            <select class="form-control" name="medical_id" id="medical_id">
-                                <?php foreach ($data_medical as $ptc) : ?>
-                                    <option value="<?= $ptc['medical_id'] ?>"><?= $ptc['medical_id'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <small class="text-danger">
-                                <?php echo form_error('medical_id') ?>
-                            </small>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
                         <label for="registry_id" class="col-sm-2 col-form-label">Registry Id</label>
                         <div class="col-sm-5">
                         <select class="form-control" name="registry_id" id="registry_id">
@@ -72,18 +58,6 @@
                             </small>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="recipe_id" class="col-sm-2 col-form-label">Recipe Id</label>
-                        <div class="col-sm-5">
-                        <select class="form-control" name="recipe_id" id="recipe_id">
-                                <?php foreach ($data_recipe as $act) : ?>
-                                    <option value="<?= $act['recipe_id'] ?>"><?= $act['recipe_id'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <small class="text-danger">
-                                <?php echo form_error('recipe_id') ?>
-                            </small>
-                        </div>
                     </div>
                         <div class="col-sm-10 offset-md-2">
                             <button type="submit" class="btn btn-primary">Simpan</button>

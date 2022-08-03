@@ -9,9 +9,10 @@ class Medical extends CI_Controller
       parent::__construct();
       $this->load->model('Medical_model');
       $this->load->library('form_validation');
-      $this->load->model('Patience_model');
+      $this->load->model('Registry_model');
       $this->load->model('Action_model');
-      $this->load->model('Doctor_model');
+      $this->load->model('Recipe_model');
+      $this->load->model('Medicine_model');
    }
 
    public function index()
@@ -42,9 +43,9 @@ class Medical extends CI_Controller
    {
       $data['title'] = "Tambah Data Medical";
       
-      $data['data_patience'] = $this->Patience_model->getAll();
-      $data['data_doctor'] = $this->Doctor_model->getAll();
+      $data['data_registry'] = $this->Registry_model->getAll();
       $data['data_action'] = $this->Action_model->getAll();
+      $data['data_medicine'] = $this->Medicine_model->getAll();
 
 
       $this->form_validation->set_rules('medical_id', 'Medical ID', 'trim|required');
@@ -54,8 +55,7 @@ class Medical extends CI_Controller
       $this->form_validation->set_rules('medical_blood_pressure', 'Medical Age', 'trim|required');
       $this->form_validation->set_rules('medical_price', 'Medical Gender', 'trim|required');
       $this->form_validation->set_rules('medical_status', 'Medical Phone', 'trim|required');
-      $this->form_validation->set_rules('patience_id', 'Patience ID', 'trim|required');
-      $this->form_validation->set_rules('doctor_id', 'Doctor ID', 'trim|required');
+      $this->form_validation->set_rules('registry_id', 'registry ID', 'trim|required');
       $this->form_validation->set_rules('action_id', 'Action ID', 'trim|required');
 
       if ($this->form_validation->run() == false) {
@@ -66,14 +66,13 @@ class Medical extends CI_Controller
       } else {
          $data = [
             "medical_id" => $this->input->post('medical_id'),
+            "registry_id" => $this->input->post('registry_id'),
             "medical_date" => $this->input->post('medical_date'),
             "medical_diagnose" => $this->input->post('medical_diagnose'),
             "medical_temperature" => $this->input->post('medical_temperature'),
             "medical_blood_pressure" => $this->input->post('medical_blood_pressure'),
             "medical_price" => $this->input->post('medical_price'),
             "medical_status" => $this->input->post('medical_status'),
-            "patience_id" => $this->input->post('patience_id'),
-            "doctor_id" => $this->input->post('doctor_id'),
             "action_id" => $this->input->post('action_id'),
             "KEY" => "ulbi123"
          ];
@@ -97,9 +96,10 @@ class Medical extends CI_Controller
       $data['title'] = "Update Data Medical";
 
       $data['data_medical'] = $this->Medical_model->getById($medical_id);
-      $data['data_patience'] = $this->Patience_model->getAll();
-      $data['data_doctor'] = $this->Doctor_model->getAll();
+      $data['data_registry'] = $this->Registry_model->getAll();
       $data['data_action'] = $this->Action_model->getAll();
+      $data['data_medicine'] = $this->Medicine_model->getAll();
+
 
       $this->form_validation->set_rules('medical_id', 'Medical ID', 'trim|required');
       $this->form_validation->set_rules('medical_date', 'Medical Name', 'trim|required');
@@ -108,8 +108,7 @@ class Medical extends CI_Controller
       $this->form_validation->set_rules('medical_blood_pressure', 'Medical Age', 'trim|required');
       $this->form_validation->set_rules('medical_price', 'Medical Gender', 'trim|required');
       $this->form_validation->set_rules('medical_status', 'Medical Phone', 'trim|required');
-      $this->form_validation->set_rules('patience_id', 'Patience ID', 'trim|required');
-      $this->form_validation->set_rules('doctor_id', 'Doctor ID', 'trim|required');
+      $this->form_validation->set_rules('registry_id', 'Registry ID', 'trim|required');
       $this->form_validation->set_rules('action_id', 'Action ID', 'trim|required');
 
       if ($this->form_validation->run() == false) {
@@ -120,14 +119,13 @@ class Medical extends CI_Controller
       } else {
          $data = [
             "medical_id" => $this->input->post('medical_id'),
+            "registry_id" => $this->input->post('registry_id'),
             "medical_date" => $this->input->post('medical_date'),
             "medical_diagnose" => $this->input->post('medical_diagnose'),
             "medical_temperature" => $this->input->post('medical_temperature'),
             "medical_blood_pressure" => $this->input->post('medical_blood_pressure'),
             "medical_price" => $this->input->post('medical_price'),
             "medical_status" => $this->input->post('medical_status'),
-            "patience_id" => $this->input->post('patience_id'),
-            "doctor_id" => $this->input->post('doctor_id'),
             "action_id" => $this->input->post('action_id'),
             "KEY" => "ulbi123"
          ];

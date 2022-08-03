@@ -28,6 +28,11 @@ class Medical_model extends CI_Model
         ]);
 
         $result = json_decode($response->getBody()->getContents(), TRUE);
+        
+        if (!$result['data']) {
+            $pesan = 'data tidak ada';
+            return $pesan ;
+        }
 
         return $result['data'];
     }

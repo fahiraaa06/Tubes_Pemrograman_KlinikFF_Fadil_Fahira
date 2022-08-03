@@ -172,6 +172,7 @@ function act_delete()
         );
     }
 } 
+
 function getharga_get() {
     $action_id = $this->get('action_id');
     $data = $this->Action_model->getHarga($action_id);

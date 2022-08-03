@@ -29,6 +29,11 @@ class Recipe_model extends CI_Model
 
         $result = json_decode($response->getBody()->getContents(), TRUE);
 
+        if (!$result['status'] == 'false') {
+            $pesan = 'data tidak ada';
+            return $pesan ;
+        }
+
         return $result['data'];
     }
 

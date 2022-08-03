@@ -7,39 +7,50 @@ class Recipe_model extends CI_Model
 
     //fungsi untuk mendapatkan data 
     public function getDataRecipe
-($recipe_id)
+    ($id_recipe)
     {
         $this->db->from($this->_table_recipe);
-        if ($recipe_id) {
-            $this->db->where('recipe_id', $recipe_id);
+        if ($id_recipe){
+            $this->db->where('recipe_id',$id_recipe);
         }
-          //medical ka recipe
-          $this->db->join('medical_record', 'medical_record.medical_id = recipe.medical_id');
-          //registry ka medical 
-          $this->db->join('registry', 'registry.registry_id = medical_record.registry_id');
-          //patience ka registry
-          $this->db->join('patience', 'patience.patience_id = registry.patience_id');
-          //doctor ka registry
-          $this->db->join('doctor', 'doctor.doctor_id = registry.doctor_id');
-          //action ka medical
-          $this->db->join('action', 'action.action_id = medical_record.action_id');
-          //medicine ka recipe
-          $this->db->join('medicine', 'medicine.medicine_id = recipe.medicine_id');
-          $this->db->select('recipe_id, recipe_qty, recipe_total,registry.registry_id,patience.patience_id,
-           patience.patience_name,doctor.doctor_id,doctor.doctor_name,medical_record.medical_id,medical_record.medical_diagnose,
-           action.action_id,action.action_name,action.action_price, medicine.medicine_id, medicine.medicine_name, medicine.medicine_price');
-          $query = $this->db->get()->result_array();
-          return $query;
+        $this->db->join('medicine','medicine.medicine_id = recipe.medicine_id');
+        $this->db->join('medical_record','medical_record.medical_id = recipe.medical_id');
+        $this->db->select('recipe_id,medical_record.medical_id, recipe_qty, recipe_total, medicine.medicine_name, 
+        medicine.medicine_price');
+        $query = $this->db->get()->result_array();
+        return $query;
     }
 
     //fungsi untuk menambahkan data
-    public function insertRecipe
-($data)
+    public function insertRecipe($data)
     {
-        //Menggunakan Query Builder
-        $this->db->insert($this->_table_recipe, $data);
-        return $this->db->affected_rows();
-        // return $query;
+        $this->db->insert($this->_table_recipe, [
+            'recipe_id' => '',
+            'recipe_qty' => $data['recipe_qty'],
+            'recipe_total' => $data['recipe_total'],
+            'medicine_id' => $data['medicine_id'],
+            'medical_id' => $data['medical_id']
+        ]);
+
+        $idNewInsert = $this->db->insert_id();
+        
+        $this->db->from('recipe');
+        $this->db->where('recipe.recipe_id', $idNewInsert);
+        $this->db->select('recipe.recipe_total , recipe.recipe_qty as resep_qty');
+        $resepTotal = $this->db->get()->row();
+
+        $this->db->from('medicine');
+        $this->db->where('medicine.medicine_id', $data['medicine_id']);
+        $this->db->select('medicine.medicine_price as harga_obat');
+        $obatHarga = $this->db->get()->row();
+        
+        $sumTotal = intval($resepTotal->resep_qty) * intval($obatHarga->harga_obat);
+
+        $this->db->update('recipe', [
+            'recipe_total' => $sumTotal
+        ], ['recipe_id' => $idNewInsert]);
+
+        return 1;
     }
 
     //fungsi untuk mengubah data

@@ -1,4 +1,7 @@
    
+<!-- Vue -->
+    <script src="<?= base_url('assets/vue.js');?>"></script>
+
    <!-- Bootstrap core JavaScript-->
    <script src="<?= base_url('vendor/bootstrap/js/bootstrap.bundle.min.js');?>"></script>
     <script src="<?= base_url('vendor/jquery/jquery.min.js');?>"></script>
